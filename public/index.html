@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSBM Student Validator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Student Validator</h1>
+        <p class="subtitle">Verify NSBM Student Identity instantly</p>
+
+        <div class="input-group">
+            <input type="text" id="studentId" placeholder="Enter Student ID (e.g., 12345)" autocomplete="off">
+        </div>
+
+        <button id="checkBtn">
+            <span id="btnLoader" class="loader hidden"></span>
+            <span id="btnText">Verify Identity</span>
+        </button>
+
+        <div id="error" class="error-message"></div>
+        <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

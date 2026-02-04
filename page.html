@@ -1,0 +1,705 @@
+	
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from webapplayers.com/inspinia_admin-v2.7.1/form_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 21 Dec 2017 04:09:08 GMT -->
+<head>
+
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHEXJJK86X"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-BHEXJJK86X');
+	</script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSBM Online Payment</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+		<link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+    <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <div  class="gray-bg">
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-3">
+                	&nbsp;
+                </div>
+                <div class="col-lg-2"><br>
+                	<img alt="image"  src="img/logo1.png" />
+                </div>
+                <div class="col-lg-2"><br>
+                	<center><h2><b>Pay Online</b></h2></center>
+                </div>
+                <div class="col-lg-2" align="right"><br><br>
+                   <span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=56M3kAulxCP5rgmrIozfbvx5RIGfh7RJcKy1KxmaNY6sLcaK9xXxHgDYNttK"></script></span>
+                </div>
+                <div class="col-lg-3">
+                	&nbsp;
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+            <div class="col-lg-3">
+
+            </div>
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Online Payment</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                        <form action="./confirm.php" method="post" class="form-horizontal">
+                                <p>Enter your Student ID and verify details.</p><br>
+                                <div class="form-group">
+                                    <label class="col-lg-3" >Student's NSBM ID No / Reference No:</label>
+                                    <div class="col-lg-6"><input type="text" placeholder="Enter Student ID" data-mask="Rs 999,999,999.99" id="umisid" name="umisid" class="form-control">
+																			<br>
+																			<div class="g-recaptcha" data-sitekey="6Lf-0AYcAAAAAHitmkpoGfrXdJDdqysdlfPQV8iN" data-callback="verifyCaptcha"></div>
+																			<div id="g-recaptcha-error"></div>
+																	  </div>
+                                    <!--<div class="col-lg-2"><button class="btn btn-sm btn-defalt pull-right m-t-n-xs" type="button" onClick="view_details();"><strong>Search</strong></button></div>-->
+                                </div>
+																<div class="form-group">
+																			<label class="col-lg-3" >&nbsp;</label>
+																			<div class="col-lg-3"><button type="button" class="btn btn-primary btn-sm btn-block" onClick="view_details();">SEARCH</button></div>
+																</div>
+                                <div class="form-group"><label class="col-lg-3 ">Order No :</label>
+                                    <div class="col-lg-9"><input type="text" placeholder=""  id="ordno" name="ordno" class="form-control" readonly></div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-3 ">Name :</label>
+
+                                    <div class="col-lg-9"><input type="text" placeholder=""  id="name" name="name" class="form-control" readonly></div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-3 ">Intake :</label>
+
+                                    <div class="col-lg-9"><input type="text" placeholder=""  id="intake" name="intake" class="form-control" readonly></div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-3 ">Degree :</label>
+
+                                    <div class="col-lg-9"><input type="text" placeholder=""  id="degree" name="degree" class="form-control" readonly></div>
+                                </div>
+                              <!-- <div class="form-group"><label class="col-lg-3 ">EMail :</label>
+
+                                    <div class="col-lg-9"><input type="text" placeholder=""  id="customer_receipt_email" name="customer_receipt_email" class="form-control" ></div>
+                                </div>-->
+                                <div class="form-group"><label class="col-lg-3 ">Fee Type :</label>
+
+                                    <div class="col-lg-9">
+                                    <select class="form-control m-b" name="feetype" id="feetype" onChange="set_fee_type();" >
+                                        	<option value="" selected></option>
+                                            <option value="Degree Fee">Degree Fee</option>
+                                                      <!--  <option value="Course Fee">Course Fee</option>-->
+                                                         <option value="Advanced Certificate Programme">NSBM Advanced Certificate Programme for Bachelors Degree</option><option value="Certificate Programme">NSBM Certificate Programme for Bachelors Degree</option><option value="English Certificate">NSBM English Certificate Programme</option><option value="Bridging Program">Bridging Programme</option>                                                        <option value="Hostel Fee">Hostel Fee</option>
+                                                        <option value="Hostel Deposite Fee">Hostel Deposite</option>
+                                                        <option value="Registration Fee">Registration Fee</option>
+                                                        <option value="Library Fee">Library Fee</option>
+                                                        <option value="Convocation Fee">Convocation Fee</option>
+                                                        <option value="Late Payment Fines">Late Payment Fines</option>
+                                                        <option value="Pre Payment">Pre Payment</option>
+                                                        <option value="Repeat Exam Fee">Repeat Exam Fee</option>
+                                                        <option value="Late Payment Charges">Late Payment Charges</option>
+                                                        <option value="Lateral Entry Fee">Lateral Entry Fee</option>
+                                                        <option value="Other Fine">Other Fine</option>
+
+                                     </select>
+                                    </div>
+                                </div>
+								<div id="myDiv"></div>
+                                <div class="form-group" id="div_yearsem" style="visibility:hidden;"><label class="col-lg-3 ">Year / Semester:</label>
+
+                                    <div class="col-lg-4">
+                                    <select class="form-control m-b" name="myear" id="myear" >
+                                        	<option value=""></option>
+                                            <option value="Year 01">Year 01</option>
+                                            <option value="Year 02">Year 02</option>
+                                            <option value="Year 03">Year 03</option>
+                                            <option value="Year 04">Year 04</option>
+                                     </select>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                    <select class="form-control m-b" name="semester" id="semester" onChange="eneble_save();" >
+                                        	<option value=""></option>
+                                            <option value="Semester 01">Semester 01</option>
+                                            <option value="Semester 02">Semester 02</option>
+                                     </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" id="div_yearmonth"  style="visibility:hidden;"><label class="col-lg-3 ">Year / Month:</label>
+
+                                    <div class="col-lg-4">
+                                    <input type="text" placeholder=""  id="hosyear" name="hosyear" onChange="eneble_save();" class="form-control" >
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                    <select class="form-control m-b" name="month" id="month" >
+                                        	<option value=""></option>
+                                            <option value="January">January</option>
+                                            <option value="February">February</option>
+                                            <option value="March">March</option>
+                                            <option value="April">April</option>
+                                            <option value="May">May</option>
+                                            <option value="June">June</option>
+                                            <option value="July">July</option>
+                                            <option value="August">August</option>
+                                            <option value="September">September</option>
+                                            <option value="October">October</option>
+                                            <option value="November">November</option>
+                                            <option value="December">December</option>
+
+                                     </select>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group" id="div_checkin"  style="visibility:hidden;"><label class="col-lg-3 ">Checkin Month:</label>
+
+
+
+                                    <div class="col-lg-4">
+                                    <select class="form-control m-b" name="checkin_month" id="checkin_month" >
+                                        	<option value=""></option>
+                                            <option value="January">January</option>
+                                            <option value="February">February</option>
+                                            <option value="March">March</option>
+                                            <option value="April">April</option>
+                                            <option value="May">May</option>
+                                            <option value="June">June</option>
+                                            <option value="July">July</option>
+                                            <option value="August">August</option>
+                                            <option value="September">September</option>
+                                            <option value="October">October</option>
+                                            <option value="November">November</option>
+                                            <option value="December">December</option>
+
+                                     </select>
+                                    </div>
+                                </div>
+
+								
+                               
+
+                                <div class="form-group"><label class="col-lg-3 ">Amount :</label>
+
+                                    <div class="col-lg-9"><input type="text" placeholder="" value="0"  id="amount" name="amount" class="form-control" onChange="eneble_save();" ></div>
+                                </div>
+
+                                 <div class="form-group"><label class="col-lg-3 ">Currency :</label>
+
+                                    <div class="col-lg-9"><input type="text" value="LKR"  id="currency" name="currency" class="form-control" readonly></div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="paynow" id="paynow" onClick="set_session();" disabled><strong>Next</strong></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12" >
+                    <br><br><br><br><br><br><br> <br><br><br><br><br>
+
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+        </div>
+
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+
+	 <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+
+    <!-- iCheck -->
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green',
+                    radioClass: 'iradio_square-green',
+                });
+            });
+        </script>
+
+
+      <script>
+			//google verifyCaptcha
+			var recaptcha_response = '';
+			function captchaResponse() {
+			    if(recaptcha_response.length == 0) {
+			        document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+			        return false;
+			    }
+			    return true;
+			}
+			function verifyCaptcha(token) {
+			    recaptcha_response = token;
+			    document.getElementById('g-recaptcha-error').innerHTML = '';
+			}
+
+
+
+
+
+function GetXmlHttpObject()
+{
+    var xmlHttp = null;
+    try
+    {
+        // Firefox, Opera 8.0+, Safari
+        xmlHttp = new XMLHttpRequest();
+    }
+    catch (e)
+    {
+        // Internet Explorer
+        try
+        {
+            xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e)
+        {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+    }
+    return xmlHttp;
+}
+
+document.getElementById("paynow").disabled = true;
+
+function set_feetype() {
+
+
+    xmlHttp = GetXmlHttpObject();
+    if (xmlHttp == null)
+    {
+        alert("Browser does not support HTTP Request");
+        return;
+    }
+
+
+    if (document.getElementById('feetype').value=='Degree Fee'){
+
+		document.getElementById("div_yearsem").style.visibility = "visible";
+		document.getElementById("div_yearmonth").style.visibility = "hidden";
+		document.getElementById("div_checkin").style.visibility = "hidden";
+		document.getElementById("div_module").style.visibility = "hidden";
+		document.getElementById("paynow").disabled = true;
+
+
+	} else if (document.getElementById('feetype').value=='Hostel Fee'){
+
+		document.getElementById("div_yearsem").style.visibility = "hidden";
+		document.getElementById("div_yearmonth").style.visibility = "visible";
+		document.getElementById("div_checkin").style.visibility = "hidden";
+		document.getElementById("div_module").style.visibility = "hidden";
+		document.getElementById("paynow").disabled = true;
+
+
+	} else if (document.getElementById('feetype').value=='Hostel Deposite Fee'){
+
+		document.getElementById("div_yearsem").style.visibility = "hidden";
+		document.getElementById("div_yearmonth").style.visibility = "hidden";
+		document.getElementById("div_checkin").style.visibility = "visible";
+		document.getElementById("div_module").style.visibility = "hidden";
+		document.getElementById("paynow").disabled = false;
+
+
+	} else if (document.getElementById('feetype').value=='Repeat Exam Fee'){
+
+		document.getElementById("div_yearsem").style.visibility = "visible";
+		document.getElementById("div_yearmonth").style.visibility = "hidden";
+		document.getElementById("div_checkin").style.visibility = "hidden";
+		document.getElementById("div_module").style.visibility = "visible";
+		document.getElementById("paynow").disabled = true;
+
+
+	} else {
+
+		document.getElementById("div_yearsem").style.visibility = "hidden";
+		document.getElementById("div_yearmonth").style.visibility = "hidden";
+		document.getElementById("div_checkin").style.visibility = "hidden";
+		document.getElementById("div_module").style.visibility = "hidden";
+		document.getElementById("paynow").disabled = false;
+
+
+	}
+
+
+
+
+
+}
+
+function eneble_save(){
+	document.getElementById("paynow").disabled = false;
+}
+
+function view_details(){
+	if(captchaResponse()){
+		xmlHttp = GetXmlHttpObject();
+        if (xmlHttp == null){
+            alert("Browser does not support HTTP Request");
+            return;
+        }
+		var url = 'pay_data.php';
+    var params = 'command=view_details';
+		var umisid=document.getElementById('umisid').value;
+				umisid = umisid.replace(new RegExp("\\\\", "g"), "");
+        params = params + '&umisid=' + umisid;
+				xmlHttp.open("POST", url, true);
+        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttp.setRequestHeader("Content-length", params.length);
+        xmlHttp.setRequestHeader("Connection", "close");
+        xmlHttp.onreadystatechange = view_details_result;
+        xmlHttp.send(params);
+			}else{
+				// alert("Please click on Captcha field");
+			}
+}
+
+
+function view_details_result() {
+    var XMLAddress1;
+
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
+    {
+
+		//alert(xmlHttp.responseText);
+        var response=xmlHttp.responseText;
+		var obj = JSON.parse(response);
+
+		if (obj.status=='OK'){
+			if ((obj.student.umisid !="") || (obj.student.std_id !="")) {
+
+				document.getElementById('ordno').value=obj.student.orderno;
+				document.getElementById('name').value=obj.student.name;
+				document.getElementById('degree').value=obj.student.degree;
+				document.getElementById('intake').value=obj.student.intake;
+				
+				
+				//document.getElementById('customer_receipt_email').value=obj.student.customer_receipt_email;
+				//document.getElementById('feetype').value='Convocation Fee';
+				//document.getElementById('order.amount').value=5000.00;
+				//document.getElementById('order.amount').value=5000;
+				//document.getElementById('textarea').value=xmlHttp.responseText;
+
+			}	else {
+
+				document.getElementById('ordno').value='';
+				document.getElementById('name').value='';
+				document.getElementById('degree').value='';
+				document.getElementById('intake').value='';
+				//document.getElementById('customer_receipt_email').value='';
+				//document.getElementById('feetype').value='Convocation Fee';
+				//document.getElementById('order.amount').value=5000.00;
+				//document.getElementById('order.amount').value=5000;
+
+				document.getElementById("paynow").disabled = true;
+
+			}
+		} else {
+
+			document.getElementById('ordno').value='';
+				document.getElementById('name').value='';
+				document.getElementById('degree').value='';
+				document.getElementById('intake').value='';
+				//document.getElementById('customer_receipt_email').value='';
+				//document.getElementById('feetype').value='Convocation Fee';
+				//document.getElementById('order.amount').value=5000.00;
+				//document.getElementById('order.amount').value=5000;
+
+				document.getElementById("paynow").disabled = true;
+
+		}
+		
+		document.getElementById("feetype").value = "";
+		document.getElementById("amount").value = 0;
+		document.getElementById("myDiv").innerHTML = '';
+
+	}
+}
+
+
+function set_fee_type(){
+	if(captchaResponse()){
+		xmlHttp = GetXmlHttpObject();
+        if (xmlHttp == null){
+            alert("Browser does not support HTTP Request");
+            return;
+        }
+		
+		
+		 if (document.getElementById('feetype').value=='Degree Fee'){
+
+		document.getElementById("div_yearsem").style.visibility = "visible";
+		document.getElementById("div_yearmonth").style.visibility = "hidden";
+		document.getElementById("div_checkin").style.visibility = "hidden";
+		document.getElementById("div_module").style.visibility = "hidden";
+		document.getElementById("paynow").disabled = true;
+
+
+	} else if (document.getElementById('feetype').value=='Hostel Fee'){
+
+		document.getElementById("div_yearsem").style.visibility = "hidden";
+		document.getElementById("div_yearmonth").style.visibility = "visible";
+		document.getElementById("div_checkin").style.visibility = "hidden";
+		document.getElementById("div_module").style.visibility = "hidden";
+		document.getElementById("paynow").disabled = true;
+
+
+	} else if (document.getElementById('feetype').value=='Hostel Deposite Fee'){
+
+		document.getElementById("div_yearsem").style.visibility = "hidden";
+		document.getElementById("div_yearmonth").style.visibility = "hidden";
+		document.getElementById("div_checkin").style.visibility = "visible";
+		document.getElementById("div_module").style.visibility = "hidden";
+		document.getElementById("paynow").disabled = false;
+
+
+	} else if (document.getElementById('feetype').value=='Repeat Exam Fee'){
+	
+		var url = 'pay_data.php';
+    	var params = 'command=set_fee_type';
+		var umisid=document.getElementById('umisid').value;
+				umisid = umisid.replace(new RegExp("\\\\", "g"), "");
+        params = params + '&umisid=' + umisid;
+		params = params + '&feetype=' + document.getElementById('feetype').value;
+		xmlHttp.open("POST", url, true);
+        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttp.setRequestHeader("Content-length", params.length);
+        xmlHttp.setRequestHeader("Connection", "close");
+        xmlHttp.onreadystatechange = set_fee_type_result;
+        xmlHttp.send(params);
+		
+	} else {
+		
+
+		document.getElementById("div_yearsem").style.visibility = "hidden";
+		document.getElementById("div_yearmonth").style.visibility = "hidden";
+		document.getElementById("div_checkin").style.visibility = "hidden";
+		document.getElementById("div_module").style.visibility = "hidden";
+		document.getElementById("paynow").disabled = false;
+	}
+   }else{
+				// alert("Please click on Captcha field");
+   }
+}
+
+function set_fee_type_result() {
+    var XMLAddress1;
+
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
+    {
+		//alert(xmlHttp.responseText);
+		document.getElementById("myDiv").innerHTML = xmlHttp.responseText;
+	}
+}
+
+
+		 $('.chosen-select').chosen({width: "100%"});
+
+
+var paid_module_count=1;
+
+function calc_amount(module, inv_no, repeat_fee, tot_mod, i)
+{
+		
+	var amount=parseInt(document.getElementById("amount").value);
+	var module_list='';
+	
+	var module_id='mod_'+i;
+	
+	if (document.getElementById(module_id).checked==true){
+		
+		module_id_chked='mod_checked_'+paid_module_count;
+		inv_chked='inv_chked_'+paid_module_count;
+		
+		amount=amount+repeat_fee;
+		
+			
+		/*if (i==1){
+			module_list=module;
+		} else {
+			module_list=module_list+'/'+module;
+		}*/
+		
+		
+		/*sessionStorage.setItem(module_id_chked, module);
+		sessionStorage.setItem(inv_chked, inv_no);*/
+		
+		
+		
+		xmlHttp = GetXmlHttpObject();
+        if (xmlHttp == null){
+            alert("Browser does not support HTTP Request");
+            return;
+        }
+		var url = 'pay_data.php';
+		
+    	var params = 'command=set_session2';
+		params = params + '&' + module_id_chked + '=' + module;
+		params = params + '&' + inv_chked + '=' + inv_no;
+		params = params + '&paid_module_count=' + paid_module_count;
+		
+		xmlHttp.open("POST", url, true);
+        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttp.setRequestHeader("Content-length", params.length);
+        xmlHttp.setRequestHeader("Connection", "close");
+		
+        xmlHttp.onreadystatechange = view_details_result111;
+        xmlHttp.send(params);
+		
+		paid_module_count=paid_module_count+1;
+		
+	} else {
+		
+		xmlHttp = GetXmlHttpObject();
+        if (xmlHttp == null){
+            alert("Browser does not support HTTP Request");
+            return;
+        }
+		
+		var j=1;
+		
+			
+			//var tmp_mod=sessionStorage.getItem(module_id_chked);
+			
+				//sessionStorage.setItem(module_id_chked, '');
+				
+				var url = 'pay_data.php';
+				var params = 'command=set_session3';
+				params = params + '&module=' + module;
+				params = params + '&paid_module_count=' + paid_module_count;
+				//alert(params);
+				xmlHttp.open("POST", url, true);
+				xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xmlHttp.setRequestHeader("Content-length", params.length);
+				xmlHttp.setRequestHeader("Connection", "close");
+				xmlHttp.onreadystatechange = view_details_result111;
+				xmlHttp.send(params);
+			
+		amount=amount-repeat_fee;
+		
+	}
+	//alert(module);	
+	
+	document.getElementById("paynow").disabled = false;
+	
+	document.getElementById("amount").value=amount;
+	document.getElementById("amount").readOnly = true;
+	
+	//sessionStorage.setItem('module_list', module_list);
+	//params = params + '&module_list=' + module_code;
+	
+	sessionStorage.setItem('paid_module_count', paid_module_count);
+	//params = params + '&paid_module_count=' + paid_module_count;
+	
+	
+	
+}
+
+function view_details_result111() {
+    var XMLAddress1;
+
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
+    {
+
+		//alert(xmlHttp.responseText);
+		
+	}
+}
+
+/*function set_session()
+{
+	
+	xmlHttp = GetXmlHttpObject();
+    if (xmlHttp == null){
+    	alert("Browser does not support HTTP Request");
+        return;
+    }
+	
+	var url = 'pay_data.php';
+    var params = 'command=set_session';
+	
+	var i=1;
+	while (sessionStorage.getItem('paid_module_count')>i){
+		
+		module_id_chked='mod_checked_'+i;
+		inv_chked='inv_chked_'+i;
+		
+		params = params + '&' + module_id_chked + '=' + sessionStorage.getItem(module_id_chked);
+		params = params + '&' + inv_chked + '=' + sessionStorage.getItem(inv_chked);
+	
+		i=i+1;
+	}
+	//alert(params);
+	params = params + '&module_list=' + sessionStorage.getItem('module_list');
+	params = params + '&paid_module_count=' + sessionStorage.getItem('paid_module_count');
+	
+
+	xmlHttp.open("POST", url, true);
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.setRequestHeader("Content-length", params.length);
+    xmlHttp.setRequestHeader("Connection", "close");
+    xmlHttp.onreadystatechange = set_session_result;
+    xmlHttp.send(params);
+	
+}*/
+	
+function set_session_result() {
+    var XMLAddress1;
+
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
+    {
+		//alert(xmlHttp.responseText);
+		//document.getElementById("myDiv").innerHTML = xmlHttp.responseText;
+	}
+}
+
+
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from webapplayers.com/inspinia_admin-v2.7.1/form_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 21 Dec 2017 04:09:09 GMT -->
+</html>
