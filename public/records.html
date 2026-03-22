@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Records — 2025.3 Intake</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── Page-level overrides for the wide records layout ── */
+        body {
+            align-items: flex-start;
+            overflow: auto;
+            padding: 2rem 1rem;
+        }
+
+        .records-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 10;
+            position: relative;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+        .back-link {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            text-decoration: none;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+
+        .back-link:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .stats-bar {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .stats-bar span {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        /* Search */
+        .search-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-row input {
+            flex: 1;
+        }
+
+        .search-row button {
+            width: auto;
+            padding: 1rem 1.4rem;
+            font-size: 0.95rem;
+        }
+
+        /* Table */
+        .table-wrap {
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            table-layout: fixed;
+        }
+
+        col.col-num    { width: 5%; }
+        col.col-name   { width: 17%; }
+        col.col-id     { width: 10%; }
+        col.col-degree { width: 27%; }
+        col.col-intake { width: 8%; }
+        col.col-email  { width: 18%; }
+        col.col-count  { width: 6%; }
+        col.col-date   { width: 13%; }
+
+        thead tr {
+            background: rgba(14, 165, 233, 0.12);
+        }
+
+        thead th {
+            padding: 0.9rem 1rem;
+            text-align: left;
+            color: #38bdf8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-size: 0.78rem;
+        }
+
+        tbody tr {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.15s;
+        }
+
+        tbody tr:hover {
+            background: rgba(255,255,255,0.04);
+        }
+
+        tbody td {
+            padding: 0.85rem 1rem;
+            color: #e2e8f0;
+            vertical-align: middle;
+            word-break: break-word;
+        }
+
+        tbody td.muted {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+
+        .count-badge {
+            display: inline-block;
+            min-width: 22px;
+            text-align: center;
+            padding: 0.15rem 0.5rem;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: rgba(139,92,246,0.25);
+            color: #c4b5fd;
+            border: 1px solid rgba(139,92,246,0.35);
+        }
+
+        /* Empty / loading */
+        .state-msg {
+            padding: 3rem 1rem;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .state-msg .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        #errorMsg {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="records-wrapper">
+
+        <div class="page-header">
+            <div>
+                <h1>Student Records</h1>
+                <p class="subtitle" style="margin-bottom:0">2025.3 Intake — Saved lookups</p>
+            </div>
+            <a href="/" class="back-link">← Back to Validator</a>
+        </div>
+
+        <div id="statsBar" class="stats-bar">Loading…</div>
+
+        <div class="search-row">
+            <input type="text" id="searchInput" placeholder="Search by name, ID or degree…" autocomplete="off">
+            <button id="clearBtn" title="Clear search">✕ Clear</button>
+        </div>
+
+        <div class="error-message" id="errorMsg"></div>
+
+        <div class="table-wrap">
+            <table>
+                <colgroup>
+                    <col class="col-num">
+                    <col class="col-name">
+                    <col class="col-id">
+                    <col class="col-degree">
+                    <col class="col-intake">
+                    <col class="col-email">
+                    <col class="col-count">
+                    <col class="col-date">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th style="text-align:center">#</th>
+                        <th>Name</th>
+                        <th>Student ID</th>
+                        <th>Degree</th>
+                        <th>Intake</th>
+                        <th>Email</th>
+                        <th>Lookups</th>
+                        <th>Last Searched</th>
+                    </tr>
+                </thead>
+                <tbody id="recordsBody">
+                    <tr>
+                        <td colspan="8">
+                            <div class="state-msg">
+                                <span class="icon">⏳</span>
+                                Loading records…
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn    = document.getElementById('clearBtn');
+        const statsBar    = document.getElementById('statsBar');
+        const errorMsg    = document.getElementById('errorMsg');
+        const tbody       = document.getElementById('recordsBody');
+
+        let debounceTimer;
+
+        async function fetchRecords(q = '') {
+            try {
+                const url = q ? `/api/records?q=${encodeURIComponent(q)}` : '/api/records';
+                const res = await fetch(url);
+                if (!res.ok) throw new Error(`Server returned ${res.status}`);
+                return await res.json();
+            } catch (err) {
+                showError('Failed to load records: ' + err.message);
+                return null;
+            }
+        }
+
+        function formatDate(iso) {
+            if (!iso) return '—';
+            try {
+                const d = new Date(iso);
+                return d.toLocaleString('en-GB', {
+                    day: '2-digit', month: 'short', year: 'numeric',
+                    hour: '2-digit', minute: '2-digit'
+                });
+            } catch { return iso; }
+        }
+
+        function cell(text, muted = false) {
+            const td = document.createElement('td');
+            if (!text && text !== 0) {
+                td.textContent = '—';
+                td.classList.add('muted');
+            } else {
+                td.textContent = text;
+                if (muted) td.classList.add('muted');
+            }
+            return td;
+        }
+
+        function renderTable(data) {
+            if (!data) return;
+
+            statsBar.innerHTML = `Showing <span>${data.total}</span> record${data.total !== 1 ? 's' : ''}`;
+
+            if (data.records.length === 0) {
+                tbody.innerHTML = `<tr>
+                    <td colspan="8">
+                        <div class="state-msg">
+                            <span class="icon">🔍</span>
+                            No records found${searchInput.value ? ' for <strong>' + escHtml(searchInput.value) + '</strong>' : ''}.
+                        </div>
+                    </td>
+                </tr>`;
+                return;
+            }
+
+            tbody.innerHTML = '';
+
+            data.records.forEach((r, i) => {
+                const tr = document.createElement('tr');
+
+                const numTd = document.createElement('td');
+                numTd.style.color = '#64748b';
+                numTd.style.fontSize = '0.8rem';
+                numTd.style.textAlign = 'center';
+                numTd.textContent = i + 1;
+
+                const intakeTd = document.createElement('td');
+                intakeTd.innerHTML = r.intake ? `<span class="badge">${escHtml(r.intake)}</span>` : '<span class="muted">—</span>';
+
+                const countTd = document.createElement('td');
+                countTd.innerHTML = `<span class="count-badge">${r.lookupCount || 1}</span>`;
+
+                tr.appendChild(numTd);
+                tr.appendChild(cell(r.name));
+                tr.appendChild(cell(r.studentId));
+                tr.appendChild(cell(r.degree));
+                tr.appendChild(intakeTd);
+                tr.appendChild(cell(r.email));
+                tr.appendChild(countTd);
+                tr.appendChild(cell(formatDate(r.lastRecordedAt)));
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        function showError(msg) {
+            errorMsg.textContent = msg;
+            errorMsg.style.display = 'block';
+        }
+
+        function hideError() {
+            errorMsg.style.display = 'none';
+        }
+
+        function escHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        async function load(q) {
+            hideError();
+            const data = await fetchRecords(q);
+            renderTable(data);
+        }
+
+        // Live search with debounce
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => load(searchInput.value.trim()), 280);
+        });
+
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchInput.value = '';
+                load('');
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchInput.focus();
+            load('');
+        });
+
+        // Initial load
+        load('');
+    </script>
+</body>
+
+</html>

@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     checkBtn.addEventListener('click', checkId);
 
     async function checkId() {
-        const studentId = studentIdInput.value.trim();
+        const query = studentIdInput.value.trim();
 
-        if (!studentId) {
-            showError('Please enter a Student ID');
+        if (!query) {
+            showError('Please enter a Student ID or Name');
             return;
         }
 
@@ -34,19 +34,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ studentId })
+                body: JSON.stringify({ query })
             });
 
             const data = await response.json();
+
+            if (!response.ok) {
+                showError(data.error || 'Request failed. Please try again.');
+                return;
+            }
 
             if (data.status === 'OK') {
                 if (data.student && (data.student.name || data.student.orderno)) {
                     showResult(data.student);
                 } else {
-                    showError('Student ID Valid, but no details found.');
+                    showError('Entry valid, but no details found.');
                 }
             } else if (data.status === 'NO') {
-                showError('Student ID not found or Invalid.');
+                showError('Student details not found or invalid ID.');
             } else {
                 showError('Unexpected response from server.');
             }
