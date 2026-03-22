@@ -69,7 +69,7 @@ Behavior notes:
 
 ## Saved Student Records
 
-After a successful lookup, the app saves student details to `student-records.json` only when the student intake is exactly `2025.3`.
+After a successful lookup, the app saves student details to `student-records.json` for all student intakes.
 
 Each record stores:
 *   `studentId`
@@ -84,7 +84,7 @@ Each record stores:
 *   `lastRecordedAt`
 *   `lookupCount`
 
-If the same student is searched again and intake is `2025.3`, the existing record is updated instead of creating a duplicate.
+If the same student is searched again, the existing record is updated instead of creating a duplicate.
 
 ## Project Structure
 

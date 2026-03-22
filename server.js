@@ -126,11 +126,7 @@ function upsertStudentRecord(student, input, matchedBy) {
         return null;
     }
 
-    // Save only records that belong to the 2025.3 intake.
     const intake = String(student.intake || '').trim();
-    if (intake !== '2025.3') {
-        return null;
-    }
 
     const records = loadStudentRecords();
     const studentId = String(student.umisid).trim();
@@ -226,7 +222,7 @@ function resolveStudentId(input) {
     }
 }
 
-// API Endpoint to retrieve saved student records (intake 2025.3)
+// API Endpoint to retrieve saved student records (all intakes)
 app.get('/api/records', (req, res) => {
     const records = loadStudentRecords();
     const q = String(req.query.q || '').trim().toLowerCase();
@@ -288,7 +284,6 @@ app.post('/api/check-id', async (req, res) => {
             }
             : student;
 
-        const isTargetIntake = String(studentWithResolvedId && studentWithResolvedId.intake || '').trim() === '2025.3';
         const recordedStudent = response.data && response.data.status === 'OK'
             ? upsertStudentRecord(studentWithResolvedId, input, resolved.matchedBy)
             : null;
@@ -306,10 +301,10 @@ app.post('/api/check-id', async (req, res) => {
             record: recordedStudent
             ,
             storage: {
-                targetIntake: '2025.3',
-                intakeMatched: isTargetIntake,
+                targetIntake: 'all',
+                intakeMatched: true,
                 saved: Boolean(recordedStudent),
-                reason: isTargetIntake ? 'matched-intake' : 'intake-not-2025.3'
+                reason: recordedStudent ? 'saved' : 'not-saved'
             }
         });
 
